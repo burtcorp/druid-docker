@@ -9,7 +9,7 @@ ARG DRUID_VERSION=0.9.1.1
 RUN curl "http://static.druid.io/artifacts/releases/druid-$DRUID_VERSION-bin.tar.gz" \
       | tar zxf - --strip-components 1 -C $DRUID_HOME
 
-RUN curl "http://static.druid.io/artifacts/releases/mysql-metadata-storage-0.9.1.1.tar.gz" \
+RUN curl "http://static.druid.io/artifacts/releases/mysql-metadata-storage-$DRUID_VERSION.tar.gz" \
       | tar zxf - -C $DRUID_HOME/extensions
 
 RUN mkdir -p $DRUID_HOME/var/druid
