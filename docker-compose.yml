@@ -3,6 +3,8 @@ version: '2'
 services:
   zookeeper:
     image: mesoscloud/zookeeper:3.4.8-ubuntu-14.04
+    volumes:
+      - './data/zookeeper:/tmp/zookeeper:rw'
   mysql:
     image: mysql:5.7
     environment:
@@ -13,6 +15,8 @@ services:
     command:
       - --character-set-server=utf8
       - --collation-server=utf8_unicode_ci
+    volumes:
+      - './data/mysql:/var/lib/mysql:rw'
   historical:
     build: ./druid
     image: druid
@@ -27,6 +31,8 @@ services:
       - -Xmx512m
     ports:
       - '8083:8083'
+    volumes:
+      - './data/historical:/usr/local/druid/var:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -44,6 +50,8 @@ services:
       - -Xmx512m
     ports:
       - '8082:8082'
+    volumes:
+      - './data/broker:/usr/local/druid/var:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -61,6 +69,8 @@ services:
       - -Xmx512m
     ports:
       - '8081:8081'
+    volumes:
+      - './data/coordinator:/usr/local/druid/var:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -78,6 +88,8 @@ services:
       - -Xmx512m
     ports:
       - '8090:8090'
+    volumes:
+      - './data/overlord:/usr/local/druid/var:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -93,6 +105,8 @@ services:
       - -Ddruid.metadata.storage.connector.password=diurd
       - -Xms0m
       - -Xmx512m
+    volumes:
+      - './data/middle_manager:/usr/local/druid/var:rw'
     depends_on:
       - zookeeper
       - mysql

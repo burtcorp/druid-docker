@@ -20,6 +20,8 @@ COPY run.sh $DRUID_HOME/bin/run.sh
 RUN sed -i '/druid.zk.service.host=/s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
 RUN sed -i '/druid.metadata.storage./s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
 
+VOLUME $DRUID_HOME/var/druid
+
 WORKDIR $DRUID_HOME
 
 EXPOSE 8081-8083 8090
