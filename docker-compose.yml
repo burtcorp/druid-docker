@@ -1,0 +1,98 @@
+---
+version: '2'
+services:
+  zookeeper:
+    image: mesoscloud/zookeeper:3.4.8-ubuntu-14.04
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
+      MYSQL_DATABASE: druid
+      MYSQL_USER: druid
+      MYSQL_PASSWORD: diurd
+    command:
+      - --character-set-server=utf8
+      - --collation-server=utf8_unicode_ci
+  historical:
+    build: ./druid
+    image: druid
+    command:
+      - historical
+      - -Ddruid.zk.service.host=zookeeper
+      - -Ddruid.metadata.storage.type=mysql
+      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
+      - -Ddruid.metadata.storage.connector.user=druid
+      - -Ddruid.metadata.storage.connector.password=diurd
+      - -Xms0m
+      - -Xmx512m
+    ports:
+      - '8083:8083'
+    depends_on:
+      - zookeeper
+      - mysql
+  broker:
+    build: ./druid
+    image: druid
+    command:
+      - broker
+      - -Ddruid.zk.service.host=zookeeper
+      - -Ddruid.metadata.storage.type=mysql
+      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
+      - -Ddruid.metadata.storage.connector.user=druid
+      - -Ddruid.metadata.storage.connector.password=diurd
+      - -Xms0m
+      - -Xmx512m
+    ports:
+      - '8082:8082'
+    depends_on:
+      - zookeeper
+      - mysql
+  coordinator:
+    build: ./druid
+    image: druid
+    command:
+      - coordinator
+      - -Ddruid.zk.service.host=zookeeper
+      - -Ddruid.metadata.storage.type=mysql
+      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
+      - -Ddruid.metadata.storage.connector.user=druid
+      - -Ddruid.metadata.storage.connector.password=diurd
+      - -Xms0m
+      - -Xmx512m
+    ports:
+      - '8081:8081'
+    depends_on:
+      - zookeeper
+      - mysql
+  overlord:
+    build: ./druid
+    image: druid
+    command:
+      - overlord
+      - -Ddruid.zk.service.host=zookeeper
+      - -Ddruid.metadata.storage.type=mysql
+      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
+      - -Ddruid.metadata.storage.connector.user=druid
+      - -Ddruid.metadata.storage.connector.password=diurd
+      - -Xms0m
+      - -Xmx512m
+    ports:
+      - '8090:8090'
+    depends_on:
+      - zookeeper
+      - mysql
+  middle_manager:
+    build: ./druid
+    image: druid
+    command:
+      - middleManager
+      - -Ddruid.zk.service.host=zookeeper
+      - -Ddruid.metadata.storage.type=mysql
+      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
+      - -Ddruid.metadata.storage.connector.user=druid
+      - -Ddruid.metadata.storage.connector.password=diurd
+      - -Xms0m
+      - -Xmx512m
+    depends_on:
+      - zookeeper
+      - mysql
