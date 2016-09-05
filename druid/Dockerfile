@@ -12,7 +12,8 @@ RUN curl "http://static.druid.io/artifacts/releases/druid-$DRUID_VERSION-bin.tar
 RUN curl "http://static.druid.io/artifacts/releases/mysql-metadata-storage-$DRUID_VERSION.tar.gz" \
       | tar zxf - -C $DRUID_HOME/extensions
 
-RUN mkdir -p $DRUID_HOME/var/druid
+RUN mkdir -p $DRUID_HOME/var/druid \
+             $DRUID_HOME/var/tmp
 
 COPY run.sh $DRUID_HOME/bin/run.sh
 

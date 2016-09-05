@@ -27,6 +27,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
     ports:
@@ -46,6 +47,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
     ports:
@@ -65,6 +67,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
     ports:
@@ -84,6 +87,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
     ports:
@@ -103,6 +107,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
     volumes:
