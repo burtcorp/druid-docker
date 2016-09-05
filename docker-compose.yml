@@ -27,6 +27,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
@@ -48,6 +49,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
@@ -69,6 +71,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
@@ -90,6 +93,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
@@ -111,6 +115,7 @@ services:
       - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
       - -Ddruid.metadata.storage.connector.user=druid
       - -Ddruid.metadata.storage.connector.password=diurd
+      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m

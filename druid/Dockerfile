@@ -18,12 +18,9 @@ RUN mkdir -p $DRUID_HOME/var/druid \
 COPY run.sh $DRUID_HOME/bin/run.sh
 
 # Remove config properties to make it possible to specify them on the command line
+RUN sed -i '/druid.extensions.loadList=/s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
 RUN sed -i '/druid.zk.service.host=/s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
 RUN sed -i '/druid.metadata.storage./s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
-
-# Remove the S3 extensions, otherwise you will get errors about AWS credentials,
-# even when not using the S3 segment storage
-RUN sed -i 's/, "druid-s3-extensions"//' $DRUID_HOME/conf/druid/_common/common.runtime.properties
 
 VOLUME $DRUID_HOME/var/druid
 
