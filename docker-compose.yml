@@ -95,6 +95,7 @@ services:
       - -Ddruid.metadata.storage.connector.password=diurd
       - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
+      - -Ddruid.indexer.task.restoreTasksOnRestart=true
       - -Xms0m
       - -Xmx512m
       - -XX:+PrintGC
