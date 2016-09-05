@@ -1,0 +1,7 @@
+{
+  "dataSources" : [
+  ],
+  "properties" : {
+    "zookeeper.connect": "zookeeper:2181"
+  }
+}

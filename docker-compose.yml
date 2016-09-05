@@ -120,3 +120,22 @@ services:
     depends_on:
       - zookeeper
       - mysql
+  tranquility:
+    build: ./tranquility
+    image: tranquility
+    command:
+      - kafka
+      - -J-Xms0m
+      - -J-Xmx128m
+      - -J-XX:+PrintGC
+      - -Dzookeeper.connect=zookeeper
+      - -Djava.io.tmpdir=/usr/local/tranquility/var/tmp
+      - -configFile=conf/kafka.json
+    volumes:
+      - './conf/tranquility/:/usr/local/tranquility/conf/:rw'
+      - './extensions/tranquility/:/usr/local/tranquility/extensions/:rw'
+    ports:
+      - '8200:8200'
+    depends_on:
+      - zookeeper
+      - overlord
