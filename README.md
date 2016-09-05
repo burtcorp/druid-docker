@@ -12,6 +12,10 @@ $ docker-compose up
 
 This starts a Druid cluster, including ZooKeeper for coordination, MySQL for metadata storage, and one each of the five different Druid node types, and a Tranquility node that will run the configuration you created.
 
+### Extensions
+
+If you have Tranquility extensions you want to use you can put them in `extensions/tranquility` and add `-Ddruid.extensions.loadList=["my-extension"]` to Tranquility's command line parameters in `docker-compose.yml`. You may have to quote the parameter with singlequotes to please the YAML lords (see the corresponding parameter to the Druid processes).
+
 ### Don't worry about the errors
 
 During startup there may be exceptions thrown by the Druid overlord because it cannot connect to the metadata service. The reason is that the MySQL container will not have had time to start up MySQL and initialize the database yet. The overlord will retry so eventually it will connect. On subsequent runs the MySQL server should start quicker and you should see fewer errors.
