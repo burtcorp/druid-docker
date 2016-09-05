@@ -30,6 +30,7 @@ services:
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
+      - -XX:+PrintGC
     ports:
       - '8083:8083'
     volumes:
@@ -50,6 +51,7 @@ services:
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
+      - -XX:+PrintGC
     ports:
       - '8082:8082'
     volumes:
@@ -70,6 +72,7 @@ services:
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
+      - -XX:+PrintGC
     ports:
       - '8081:8081'
     volumes:
@@ -90,6 +93,7 @@ services:
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
+      - -XX:+PrintGC
     ports:
       - '8090:8090'
     volumes:
@@ -110,6 +114,7 @@ services:
       - -Djava.io.tmpdir=/usr/local/druid/var/tmp
       - -Xms0m
       - -Xmx512m
+      - -XX:+PrintGC
     volumes:
       - './data/middle_manager:/usr/local/druid/var:rw'
     depends_on:
