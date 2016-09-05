@@ -34,7 +34,7 @@ services:
     ports:
       - '8083:8083'
     volumes:
-      - './data/historical:/usr/local/druid/var:rw'
+      - './data/historical:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -55,7 +55,7 @@ services:
     ports:
       - '8082:8082'
     volumes:
-      - './data/broker:/usr/local/druid/var:rw'
+      - './data/broker:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -76,7 +76,7 @@ services:
     ports:
       - '8081:8081'
     volumes:
-      - './data/coordinator:/usr/local/druid/var:rw'
+      - './data/coordinator:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -97,7 +97,7 @@ services:
     ports:
       - '8090:8090'
     volumes:
-      - './data/overlord:/usr/local/druid/var:rw'
+      - './data/overlords:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
@@ -116,7 +116,7 @@ services:
       - -Xmx512m
       - -XX:+PrintGC
     volumes:
-      - './data/middle_manager:/usr/local/druid/var:rw'
+      - './data/middle_manager:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
