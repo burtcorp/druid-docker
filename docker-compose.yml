@@ -20,21 +20,11 @@ services:
   historical:
     build: ./druid
     image: druid
-    command:
-      - historical
-      - -Ddruid.zk.service.host=zookeeper
-      - -Ddruid.metadata.storage.type=mysql
-      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
-      - -Ddruid.metadata.storage.connector.user=druid
-      - -Ddruid.metadata.storage.connector.password=diurd
-      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
-      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
-      - -Xms0m
-      - -Xmx512m
-      - -XX:+PrintGC
+    command: historical
     ports:
       - '8083:8083'
     volumes:
+      - './conf:/usr/local/druid/conf:ro'
       - './data/historical:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
@@ -42,21 +32,11 @@ services:
   broker:
     build: ./druid
     image: druid
-    command:
-      - broker
-      - -Ddruid.zk.service.host=zookeeper
-      - -Ddruid.metadata.storage.type=mysql
-      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
-      - -Ddruid.metadata.storage.connector.user=druid
-      - -Ddruid.metadata.storage.connector.password=diurd
-      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
-      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
-      - -Xms0m
-      - -Xmx512m
-      - -XX:+PrintGC
+    command: broker
     ports:
       - '8082:8082'
     volumes:
+      - './conf:/usr/local/druid/conf:ro'
       - './data/broker:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
@@ -64,21 +44,11 @@ services:
   coordinator:
     build: ./druid
     image: druid
-    command:
-      - coordinator
-      - -Ddruid.zk.service.host=zookeeper
-      - -Ddruid.metadata.storage.type=mysql
-      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
-      - -Ddruid.metadata.storage.connector.user=druid
-      - -Ddruid.metadata.storage.connector.password=diurd
-      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
-      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
-      - -Xms0m
-      - -Xmx512m
-      - -XX:+PrintGC
+    command: coordinator
     ports:
       - '8081:8081'
     volumes:
+      - './conf:/usr/local/druid/conf:ro'
       - './data/coordinator:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
@@ -86,59 +56,21 @@ services:
   overlord:
     build: ./druid
     image: druid
-    command:
-      - overlord
-      - -Ddruid.zk.service.host=zookeeper
-      - -Ddruid.metadata.storage.type=mysql
-      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
-      - -Ddruid.metadata.storage.connector.user=druid
-      - -Ddruid.metadata.storage.connector.password=diurd
-      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
-      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
-      - -Ddruid.indexer.task.restoreTasksOnRestart=true
-      - -Xms0m
-      - -Xmx512m
-      - -XX:+PrintGC
+    command: overlord
     ports:
       - '8090:8090'
     volumes:
-      - './data/overlords:/usr/local/druid/var/druid:rw'
-    depends_on:
-      - zookeeper
-      - mysql
-  middle_manager:
-    build: ./druid
-    image: druid
-    command:
-      - middleManager
-      - -Ddruid.zk.service.host=zookeeper
-      - -Ddruid.metadata.storage.type=mysql
-      - -Ddruid.metadata.storage.connector.connectURI=jdbc:mysql://mysql/druid
-      - -Ddruid.metadata.storage.connector.user=druid
-      - -Ddruid.metadata.storage.connector.password=diurd
-      - '-Ddruid.extensions.loadList=["mysql-metadata-storage"]'
-      - -Djava.io.tmpdir=/usr/local/druid/var/tmp
-      - -Xms0m
-      - -Xmx512m
-      - -XX:+PrintGC
-    volumes:
-      - './data/middle_manager:/usr/local/druid/var/druid:rw'
+      - './conf:/usr/local/druid/conf:ro'
+      - './data/overlord:/usr/local/druid/var/druid:rw'
     depends_on:
       - zookeeper
       - mysql
   tranquility:
     build: ./tranquility
     image: tranquility
-    command:
-      - kafka
-      - -J-Xms0m
-      - -J-Xmx128m
-      - -J-XX:+PrintGC
-      - -Dzookeeper.connect=zookeeper
-      - -Djava.io.tmpdir=/usr/local/tranquility/var/tmp
-      - -configFile=conf/kafka.json
+    command: kafka -configFile=conf/kafka.json
     volumes:
-      - './conf/tranquility/:/usr/local/tranquility/conf/:rw'
+      - './conf/tranquility:/usr/local/tranquility/conf:ro'
       - './extensions/tranquility/:/usr/local/tranquility/extensions/:rw'
     ports:
       - '8200:8200'
