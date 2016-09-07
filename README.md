@@ -24,6 +24,8 @@ During startup there may be exceptions thrown by the Druid overlord because it c
 
 All containers will persist data to `data/$container`, e.g. `data/mysql`, `data/historical`. The indexer task logs are available in `data/middle_manager/task`.
 
+If you want to start over and reset everything, just `rm -rf data`.
+
 ## Copyright
 
 © 2016 Burt AB and contributors, use as much as as you like.
