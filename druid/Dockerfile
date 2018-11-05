@@ -17,12 +17,8 @@ RUN mkdir -p $DRUID_HOME/var/druid \
 
 COPY run.sh $DRUID_HOME/bin/run.sh
 
-# Remove config properties to make it possible to specify them on the command line
-RUN sed -i '/druid.extensions.loadList=/s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
-RUN sed -i '/druid.zk.service.host=/s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
-RUN sed -i '/druid.metadata.storage./s/^/#/' $DRUID_HOME/conf/druid/_common/common.runtime.properties
-
-VOLUME $DRUID_HOME/var/druid
+VOLUME $DRUID_HOME/var/druid \
+       $DRUID_HOME/conf
 
 WORKDIR $DRUID_HOME
 
